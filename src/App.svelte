@@ -156,15 +156,20 @@
 		
 		<div slot="footer">
 
-			{#each ostoskori as tuote (tuote.ostoskoriId)}
+			{#if (ostoskori.length > 0)}
 
-			<div>
-				<h2>{tuote.nimi}</h2>
-				<p>Kuvaus: {tuote.kuvaus}</p>
-				<p>Hinta: {tuote.hinta}€</p>
-			</div>  
-	
-		{/each}
+				{#each ostoskori as tuote (tuote.ostoskoriId)}
+					<div>
+						<h2>{tuote.nimi}</h2>
+						<p>Kuvaus: {tuote.kuvaus}</p>
+						<p>Hinta: {tuote.hinta}€</p>
+					</div>  
+				{/each}
+				
+			{:else}
+				<p> Ostoskori on tyhjä!</p>
+		    {/if}
+		
 			<div>
 				<p><b>Hinta yhteensä: {hinta()}€</b></p>
 			</div>
@@ -181,7 +186,7 @@
 {/if}
 
 {#if naytaPopUpTilaus}
-	<PopUp tuotteenNimi=" " teksti="Tilaus on tehty!" on:piilota={() => naytaPopUpLisays = !naytaPopUpLisays}/>
+	<PopUp tuotteenNimi=" " teksti="Tilaus on tehty!" on:piilota={() => naytaPopUpTilaus = !naytaPopUpTilaus}/>
 {/if}
 
 <style>
